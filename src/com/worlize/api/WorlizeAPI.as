@@ -396,7 +396,7 @@ package com.worlize.api
 		private function handshake():void {
 			var event:APIEvent = new APIEvent(APIEvent.CLIENT_HANDSHAKE);
 			var data:Object = {
-				APIVersion: 1,
+				APIVersion: VERSION,
 				appOptions: options.toJSON()
 			};
 			event.data = data;
