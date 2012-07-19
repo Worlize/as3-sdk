@@ -29,6 +29,7 @@
     <classEntry path="com.worlize.api.model.Prop"/>
     <classEntry path="com.worlize.api.model.LooseProp"/>
     <classEntry path="com.worlize.api.event.LoosePropEvent"/>
+    <classEntry path="com.worlize.api.model.Permission"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

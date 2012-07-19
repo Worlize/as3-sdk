@@ -126,8 +126,8 @@ package com.worlize.api.event
 		public static const USER_BALLOON_COLOR_CHANGED:String = "userBalloonColorChanged";
 		
 		/**
-		 *  The <code>UserEvent.USER_PRIVILEGES_CHANGED</code> constant defines the value of the
-		 *  <code>type</code> property of the event object for a <code>userPrivilegesChanged</code> event.
+		 *  The <code>UserEvent.USER_PERMISSIONS_CHANGED</code> constant defines the value of the
+		 *  <code>type</code> property of the event object for a <code>userPermissionsChanged</code> event.
 		 *
 		 *  <p>The properties of the event object have the following values:</p>
 		 *  <table class="innertable">
@@ -146,12 +146,12 @@ package com.worlize.api.event
 		 *       <code>com.worlize.api.model.User</code>.</td></tr>
 		 *  </table>
 		 *
-		 *  @eventType userPrivilegesChanged
+		 *  @eventType userPermissionsChanged
 		 *  @see com.worlize.api.model.User
 		 *  
-		 *  @productversion Worlize APIv.1
+		 *  @productversion Worlize APIv.4
 		 */
-		public static const USER_PRIVILEGES_CHANGED:String = "userPrivilegesChanged";
+		public static const USER_PERMISSIONS_CHANGED:String = "userPermissionsChanged";
 		
 		/**
 		 * The user associated with the current event.

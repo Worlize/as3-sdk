@@ -7,6 +7,7 @@ package com.worlize.api
 	import com.worlize.api.event.AuthorEvent;
 	import com.worlize.api.event.ChatEvent;
 	import com.worlize.api.event.MessageEvent;
+	import com.worlize.api.model.Avatar;
 	import com.worlize.api.model.Room;
 	import com.worlize.api.model.RoomObject;
 	import com.worlize.api.model.ThisRoom;
@@ -107,7 +108,7 @@ package com.worlize.api
 		 * 
 		 * @productversion Worlize APIv.1 
 		 */
-		public static const VERSION:int = 3;
+		public static const VERSION:int = 4;
 		
 		/**
 		 * @private

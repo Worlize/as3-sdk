@@ -40,12 +40,12 @@ package com.worlize.api.model
 	[Event(name="userBalloonColorChanged",type="com.worlize.api.event.UserEvent")]
 	
 	/**
-	 * Dispatched after the user's privileges have changed
+	 * Dispatched after the user's permissions have changed
 	 * 
-	 * @eventType com.worlize.api.event.UserEvent.USER_PRIVILEGES_CHANGED
+	 * @eventType com.worlize.api.event.UserEvent.USER_PERMISSIONS_CHANGED
 	 * @productversion Worlize API.v1 
 	 */	
-	[Event(name="userPrivilegesChanged",type="com.worlize.api.event.UserEvent")]
+	[Event(name="userPermissionsChanged",type="com.worlize.api.event.UserEvent")]
 	
 	/**
 	 * Represents a Worlize User
@@ -96,7 +96,7 @@ package com.worlize.api.model
 		/**
 		 * @private 
 		 */
-		protected var _privileges:Array;
+		protected var _permissions:Array;
 		
 		/**
 		 * Constructor.
@@ -210,17 +210,17 @@ package com.worlize.api.model
 		 * @productversion Worlize APIv.1
 		 */		
 		public function get canAuthor():Boolean {
-			return _privileges && _privileges.indexOf('canAuthor') !== -1;
+			return _permissions && _permissions.indexOf(Permission.CAN_EDIT_ROOMS) !== -1;
 		}
 		
 		/**
 		 * A list of strings representing the user's current permissions.
 		 *  
 		 * @return an array of permissions
-		 * @productversion Worlize APIv.1
+		 * @productversion Worlize APIv.4
 		 */		
-		public function get privileges():Array {
-			return _privileges.slice(0);
+		public function get permissions():Array {
+			return _permissions.slice(0);
 		}
 		
 		/**
@@ -233,6 +233,7 @@ package com.worlize.api.model
 				x: _x,
 				y: _y,
 				face: _color,
+				permissions: _permissions,
 				color: _balloonColor,
 				avatar: _avatar ? _avatar.toJSON() : null
 			};
@@ -297,14 +298,15 @@ package com.worlize.api.model
 		/**
 		 *	@private 
 		 */
-		worlize_internal function updatePrivileges(newValue:Array):void {
+		worlize_internal function updatePermissions(newValue:Array):void {
 			if (newValue === null) { return; }
 			
 			var valuesDiffer:Boolean = false;
-			if (newValue.length === _privileges.length) {
-				var sortedPrivileges:Array = newValue.sort();
-				for (var i:int = 0; i < sortedPrivileges.length; i++) {
-					if (sortedPrivileges[i] !==	_privileges[i]) {
+			var sortedPermissions:Array;
+			if (newValue.length === _permissions.length) {
+				sortedPermissions = newValue.sort();
+				for (var i:int = 0; i < sortedPermissions.length; i++) {
+					if (sortedPermissions[i] !==	_permissions[i]) {
 						valuesDiffer = true;
 						break;
 					}
@@ -312,10 +314,11 @@ package com.worlize.api.model
 			}
 			else {
 				valuesDiffer = true;
+				sortedPermissions = newValue.sort();
 			}
 			if (valuesDiffer) {
-				_privileges = sortedPrivileges;
-				var event:UserEvent = new UserEvent(UserEvent.USER_PRIVILEGES_CHANGED);
+				_permissions = sortedPermissions;
+				var event:UserEvent = new UserEvent(UserEvent.USER_PERMISSIONS_CHANGED);
 				event.user = this;
 				dispatchEvent(event);
 			}
@@ -326,7 +329,7 @@ package com.worlize.api.model
 		 */
 		worlize_internal static function fromData(data:Object):User {
 			var user:User = new User();
-			user._privileges = data.privileges.sort();
+			user._permissions = data.permissions.sort();
 			user._guid = data.guid;
 			user._name = data.name;
 			user._x = data.x;
